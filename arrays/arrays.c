@@ -21,11 +21,12 @@ typedef struct Array {
  *****/
 Array *create_array (int capacity) {
   // Allocate memory for the Array struct
-
+  Array *arr = malloc(sizeof(Array));
   // Set initial values for capacity and count
-
+  arr->capacity;
+  arr->count;
   // Allocate memory for elements
-
+  arr->elements = malloc(capacity * sizeof(arr->elements));
 }
 
 
@@ -35,9 +36,9 @@ Array *create_array (int capacity) {
 void destroy_array(Array *arr) {
 
   // Free all elements
-
+  free(arr->elements);
   // Free array
-
+  free(arr);
 }
 
 /*****
@@ -69,44 +70,44 @@ void resize_array(Array *arr) {
  *
  * Throw an error if the index is out of range.
  *****/
-char *arr_read(Array *arr, int index) {
+// char *arr_read(Array *arr, int index) {
 
-  // Throw an error if the index is greater than the current count
+//   // Throw an error if the index is greater or equal to than the current count
 
-  // Otherwise, return the element at the given index
-}
+//   // Otherwise, return the element at the given index
+// }
 
 
 /*****
  * Insert an element to the array at the given index
  *****/
-void arr_insert(Array *arr, char *element, int index) {
+// void arr_insert(Array *arr, char *element, int index) {
 
-  // Throw an error if the index is greater than the current count
+//   // Throw an error if the index is greater than the current count
 
-  // Resize the array if the number of elements is over capacity
+//   // Resize the array if the number of elements is over capacity
 
-  // Move every element after the insert index to the right one position
+//   // Move every element after the insert index to the right one position
 
-  // Copy the element and add it to the array
+//   // Copy the element and add it to the array
 
-  // Increment count by 1
+//   // Increment count by 1
 
-}
+// }
 
 /*****
  * Append an element to the end of the array
  *****/
-void arr_append(Array *arr, char *element) {
+// void arr_append(Array *arr, char *element) {
 
-  // Resize the array if the number of elements is over capacity
-  // or throw an error if resize isn't implemented yet.
+//   // Resize the array if the number of elements is over capacity
+//   // or throw an error if resize isn't implemented yet.
 
-  // Copy the element and add it to the end of the array
+//   // Copy the element and add it to the end of the array
 
-  // Increment count by 1
+//   // Increment count by 1
 
-}
+// }
 
 /*****
  * Remove the first occurence of the given element from the array,
@@ -114,16 +115,16 @@ void arr_append(Array *arr, char *element) {
  *
  * Throw an error if the value is not found.
  *****/
-void arr_remove(Array *arr, char *element) {
+// void arr_remove(Array *arr, char *element) {
 
-  // Search for the first occurence of the element and remove it.
-  // Don't forget to free its memory!
+//   // Search for the first occurence of the element and remove it.
+//   // Don't forget to free its memory!
 
-  // Shift over every element after the removed element to the left one position
+//   // Shift over every element after the removed element to the left one position
 
-  // Decrement count by 1
+//   // Decrement count by 1
 
-}
+// }
 
 
 /*****
@@ -147,13 +148,13 @@ int main(void)
 
   Array *arr = create_array(1);
 
-  arr_insert(arr, "STRING1", 0);
-  arr_append(arr, "STRING4");
-  arr_insert(arr, "STRING2", 0);
-  arr_insert(arr, "STRING3", 1);
-  arr_print(arr);
-  arr_remove(arr, "STRING3");
-  arr_print(arr);
+  // arr_insert(arr, "STRING1", 0);
+  // arr_append(arr, "STRING4");
+  // arr_insert(arr, "STRING2", 0);
+  // arr_insert(arr, "STRING3", 1);
+  // arr_print(arr);
+  // arr_remove(arr, "STRING3");
+  // arr_print(arr);
 
   destroy_array(arr);
 
