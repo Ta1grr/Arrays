@@ -27,6 +27,8 @@ Array *create_array (int capacity) {
   arr->count = 0;
   // Allocate memory for elements
   arr->elements = malloc(capacity * sizeof(arr->elements));
+
+  return arr;
 }
 
 
@@ -36,6 +38,9 @@ Array *create_array (int capacity) {
 void destroy_array(Array *arr) {
 
   // Free all elements
+  for (int i = 0; i < arr->elements; i++) {
+    free(arr->elements[i]);
+  }
   free(arr->elements);
   // Free array
   free(arr);
@@ -81,40 +86,45 @@ char *arr_read(Array *arr, int index) {
     perror("error");
   }
   // Otherwise, return the element at the given index
-  return index * sizeof(arr) + arr;
+  return arr->elements[index];
 }
 
 
 /*****
  * Insert an element to the array at the given index
  *****/
-// void arr_insert(Array *arr, char *element, int index) {
+void arr_insert(Array *arr, char *element, int index) {
 
-//   // Throw an error if the index is greater than the current count
+  // Throw an error if the index is greater than the current count
+  if (index > arr->count) {
+    printf("ERROR");
+  }
+  // Resize the array if the number of elements is over capacity
+  resize_array(arr);
+  // Move every element after the insert index to the right one position
+  
+  // Copy the element and add it to the array
 
-//   // Resize the array if the number of elements is over capacity
+  // Increment count by 1
 
-//   // Move every element after the insert index to the right one position
-
-//   // Copy the element and add it to the array
-
-//   // Increment count by 1
-
-// }
+}
 
 /*****
  * Append an element to the end of the array
  *****/
-// void arr_append(Array *arr, char *element) {
+void arr_append(Array *arr, char *element) {
 
-//   // Resize the array if the number of elements is over capacity
-//   // or throw an error if resize isn't implemented yet.
-
-//   // Copy the element and add it to the end of the array
-
-//   // Increment count by 1
-
-// }
+  // Resize the array if the number of elements is over capacity
+  // or throw an error if resize isn't implemented yet.
+  if (arr->capacity >= element) {
+    printf("ERROR: Over capacity");
+    return;
+  }
+  // Copy the element and add it to the end of the array
+  arr->elements[arr->count] = strdup(element);
+  // Increment count by 1
+  arr->count++;
+}
 
 /*****
  * Remove the first occurence of the given element from the array,
