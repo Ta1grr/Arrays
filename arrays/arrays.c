@@ -23,8 +23,8 @@ Array *create_array (int capacity) {
   // Allocate memory for the Array struct
   Array *arr = malloc(sizeof(Array));
   // Set initial values for capacity and count
-  arr->capacity;
-  arr->count;
+  arr->capacity = capacity;
+  arr->count = 0;
   // Allocate memory for elements
   arr->elements = malloc(capacity * sizeof(arr->elements));
 }
@@ -48,13 +48,17 @@ void destroy_array(Array *arr) {
 void resize_array(Array *arr) {
 
   // Create a new element storage with double capacity
-
+  char **new_space = malloc(2 * sizeof(arr->elements));
   // Copy elements into the new storage
-
+  int i;
+  int length = sizeof(arr->elements);
+  for (i = 0; i < length; i++) {
+    new_space[i] = arr->elements[i];
+  }
   // Free the old elements array (but NOT the strings they point to)
-
+  free(arr->elements);
   // Update the elements and capacity to new values
-
+  arr->elements = new_space;
 }
 
 
@@ -70,12 +74,15 @@ void resize_array(Array *arr) {
  *
  * Throw an error if the index is out of range.
  *****/
-// char *arr_read(Array *arr, int index) {
+char *arr_read(Array *arr, int index) {
 
-//   // Throw an error if the index is greater or equal to than the current count
-
-//   // Otherwise, return the element at the given index
-// }
+  // Throw an error if the index is greater or equal to than the current count
+  if (index > arr->count) {
+    perror("error");
+  }
+  // Otherwise, return the element at the given index
+  return index * sizeof(arr) + arr;
+}
 
 
 /*****
@@ -148,13 +155,13 @@ int main(void)
 
   Array *arr = create_array(1);
 
-  // arr_insert(arr, "STRING1", 0);
-  // arr_append(arr, "STRING4");
-  // arr_insert(arr, "STRING2", 0);
-  // arr_insert(arr, "STRING3", 1);
-  // arr_print(arr);
-  // arr_remove(arr, "STRING3");
-  // arr_print(arr);
+  arr_insert(arr, "STRING1", 0);
+  arr_append(arr, "STRING4");
+  arr_insert(arr, "STRING2", 0);
+  arr_insert(arr, "STRING3", 1);
+  arr_print(arr);
+  arr_remove(arr, "STRING3");
+  arr_print(arr);
 
   destroy_array(arr);
 
